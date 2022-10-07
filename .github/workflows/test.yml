@@ -26,7 +26,7 @@ jobs:
         uses: yashanand1910/standard-release-notes@v1.2.1
         id: get_release_notes
         with:
-          version: 1.2.1
+          version: 2.0.0
 
       
       - name: see changelog
