@@ -2,7 +2,7 @@
 
 ## 2.0.0
 
-## Heading 
+### Heading
 
 ### Another heading
 
@@ -16,7 +16,7 @@ The 2.0.0 version of the malaria package is an improved and more comprehensive a
 
 ## 1.0.0
 
-## Heading one
+### Heading one
 
 ### Heading two
 
