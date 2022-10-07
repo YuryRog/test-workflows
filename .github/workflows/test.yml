@@ -4,9 +4,10 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    tags:
+      - '**'
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -33,3 +34,18 @@ jobs:
         run: |
           echo "${{ steps.get_release_notes.outputs.release_notes }}"
         shell: bash -ex {0}
+
+      - name: 'Find release ID'
+        id: find_release
+        uses: cardinalby/git-get-release-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag: ${{ github.ref_name }}
+
+      - name: 'Update Release description'
+        uses: irongut/editrelease@v1.2.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          id: ${{ steps.find_release.outputs.id }}
+          body: "Package uploaded to https://example.org\n${{ steps.get_release_notes.outputs.release_notes }}"
